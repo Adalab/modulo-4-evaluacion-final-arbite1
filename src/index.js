@@ -18,7 +18,7 @@ async function getConnection() {
   const connection = await mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "arbite",
+    password: "",
     database: "Library",
   });
 
