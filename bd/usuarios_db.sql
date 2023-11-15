@@ -5,3 +5,6 @@ CREATE TABLE `Library`.`usuarios_db` (
   `password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idusuarios_db`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
+
+
+INSERT INTO `Library`.`usuarios_db`(email,nombre, password) VALUES ("ari@example.es", "ari" ,"api");

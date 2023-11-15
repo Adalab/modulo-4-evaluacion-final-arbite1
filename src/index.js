@@ -162,12 +162,34 @@ app.delete("/Library/:id", async (req, res) => {
 });
 
 //Proceso de registro
-//usuario, contraseña, email, nombre....
-app.post("/api/register", async (req, res) => {
-  const nombre = req.body.nombre;
-  const password = req.body.password;
-  const email = req.body.email;
 
-  //encriptar la contraseña
-  const passwordHashed = await bcrypt.hash(password, 5);
+app.post("/register", async (req, res) => {
+  try {
+    const nombre = req.body.nombre;
+    const password = req.body.password;
+    const email = req.body.email;
+
+    // Encriptar la contraseña
+    const passwordHashed = await bcrypt.hash(password, 5);
+
+    // Preparar la consulta SQL
+    const sql =
+      "INSERT INTO `Library`.`usuarios_db` (email, nombre, password) VALUES (?, ?, ?)";
+
+    // Obtener la conexión a la base de datos
+    const conn = await getConnection();
+
+    // Ejecutar la consulta SQL
+    const [results] = await conn.query(sql, [email, nombre, passwordHashed]);
+    conn.end();
+    res.json({
+      success: true,
+      id: results.insertId,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      error: error.message,
+    });
+  }
 });
