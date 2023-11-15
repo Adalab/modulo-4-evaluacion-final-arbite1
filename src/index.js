@@ -3,8 +3,9 @@
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2/promise");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 require("dotenv").config();
-
 //arrancar el servidor
 const app = express();
 
@@ -15,7 +16,7 @@ app.use(express.json());
 
 //conexión a la bases de datos
 async function getConnection() {
-  //creary configurar la conexion
+  //crear y configurar la conexion
   const connection = await mysql.createConnection({
     host: process.env.DBHOST,
     user: process.env.DBUSER,
@@ -59,7 +60,6 @@ app.post("/Library", async (req, res) => {
   const { titulo, autor, descripción, genero, paginas } = bookData;
 
   //Validaciones
-  //Validar que viene el nombre, ingredientes y las instrucciones -- res.json(error)
 
   let sql =
     "INSERT INTO `Library`.`books` (título, autor, descripción, género, páginas)VALUES ('?', '?', '?', '?', '?')";
@@ -159,4 +159,15 @@ app.delete("/Library/:id", async (req, res) => {
     message: "Eliminado correctamente",
   });
   conn.end();
+});
+
+//Proceso de registro
+//usuario, contraseña, email, nombre....
+app.post("/api/register", async (req, res) => {
+  const nombre = req.body.nombre;
+  const password = req.body.password;
+  const email = req.body.email;
+
+  //encriptar la contraseña
+  const passwordHashed = await bcrypt.hash(password, 5);
 });
