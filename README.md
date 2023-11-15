@@ -17,7 +17,6 @@ TECNOLOGÍAS
     • jsonwebtoken
     • bcryp
 
-      
 INSTALACIÓN
 
     1. Clona este repositorio en tú ordenador.

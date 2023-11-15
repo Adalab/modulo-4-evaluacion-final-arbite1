@@ -8,3 +8,5 @@ CREATE TABLE `Library`.`usuarios_db` (
 
 
 INSERT INTO `Library`.`usuarios_db`(email,nombre, password) VALUES ("ari@example.es", "ari" ,"api");
+
+SELECT * FROM usuarios_db WHERE nombre = "ari";
