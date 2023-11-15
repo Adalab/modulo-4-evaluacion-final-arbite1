@@ -3,6 +3,7 @@
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2/promise");
+require("dotenv").config();
 
 //arrancar el servidor
 const app = express();
@@ -16,10 +17,10 @@ app.use(express.json());
 async function getConnection() {
   //creary configurar la conexion
   const connection = await mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "arbite",
-    database: "Library",
+    host: process.env.DBHOST,
+    user: process.env.DBUSER,
+    password: process.env.DBPASS,
+    database: process.env.DBDB,
   });
 
   connection.connect();
@@ -51,42 +52,6 @@ app.get("/Library", async (req, res) => {
   });
   conn.end();
 });
-// //Obtener una receta por su ID (GET /recetas/:id).
-// app.get("/recetas/:id", async (req, res) => {
-//   //Obtener el id: url params
-//   const idReceta = req.params.id;
-
-//   if (isNaN(parseInt(idReceta))) {
-//     res.json({
-//       success: false,
-//       error: "El id debe ser un número",
-//     });
-//     return;
-//   }
-
-//   //Select a la bases de datos con un id
-//   let query = "SELECT * FROM recetas WHERE id = ?";
-
-//   //hacer la conexión con la BD
-//   const conn = await getConnection();
-
-//   //Ejecutar esa consulta
-//   const [results] = await conn.query(query, [idReceta]);
-//   const numOfElements = results.length;
-
-//   if (numOfElements === 0) {
-//     res.json({
-//       success: true,
-//       message: "No existe la receta que buscas",
-//     });
-//     return;
-//   }
-
-//   //Enviar una respuesta
-//   res.json({
-//     results: results[0], // listado
-//   });
-// });
 
 //Crear una nuevo libro (POST )
 app.post("/Library", async (req, res) => {
