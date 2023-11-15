@@ -1,8 +1,8 @@
-# DESARROLLO DE UNA API
+DESARROLLO DE UNA API
 
 En esta evaluación final del modulo 4 nos piden que desarrollemos una API a nuestra elección, que podamos listar, insertar, modificar y eliminar.
 
-INDICACIONES EJERCICIO
+INDICACIONES EJERCICIO:
 
     1. Diseño de la Base de Datos para la API
     2. Configuración del Servidor
@@ -14,7 +14,10 @@ TECNOLOGÍAS
     • Node.js
     • MySQL
     • Github
+    • jsonwebtoken
+    • bcryp
 
+      
 INSTALACIÓN
 
     1. Clona este repositorio en tú ordenador.
